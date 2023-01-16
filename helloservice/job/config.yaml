@@ -5,12 +5,6 @@ actions:
       - name: "sh.keptn.event.deployment.triggered"
     tasks:
       - name: "Run helm"
-        files:
-          - /charts
-        env:
-          - name: IMAGE
-            value: "$.data.configurationChange.values.image"
-            valueFrom: event
         image: "alpine/helm:3.7.2"
         serviceAccount: "jes-deploy-using-helm"
         cmd: ["helm"]
@@ -50,8 +44,8 @@ actions:
     tasks:
       - name: "Run locust"
         files:
-          - locust/basic.py
-          - locust/locust.conf
+          - /locust/basic.py
+          - /locust/locust.conf
 
         image: "locustio/locust:2.8.6"
         cmd: ["locust"]
